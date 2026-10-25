@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Poster Naija - By Taiwo David</title>
+<meta name="theme-color" content="#FFD700">
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiUG9zdGVyIE5haWphIGJ5IFRhaXdvIERhdmlkIiwiZGlzcGxheSI6InN0YW5kYWxvbmUifQ==">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:#0a0a0a;color:#fff;text-align:center}
+.header{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;padding:18px;font-weight:900;font-size:23px}
+.sub{font-size:11px;font-weight:600;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:10px}
+.card{background:#1e1e1e;border-radius:14px;padding:12px;border:2px solid #2a2a2a;cursor:pointer;font-weight:700;font-size:13px}
+.card.active{border-color:gold;background:#2a2a00}
+.btn{background:gold;color:#000;border:none;padding:15px;border-radius:12px;font-weight:900;width:92%;margin:7px;font-size:16px;cursor:pointer}
+.btn-green{background:#25D366;color:#fff}.btn-white{background:#fff}
+input{width:92%;padding:13px;margin:5px;border-radius:10px;border:none;font-size:16px;background:#1e1e1e;color:#fff;border:1px solid #333}
+canvas{max-width:94%;border-radius:16px;margin:12px auto;display:block;box-shadow:0 10px 30px rgba(255,215,0,0.2)}
+.counter{background:#1a1a1a;padding:8px;font-size:13px;color:gold;border-radius:20px;display:inline-block;margin:5px 0;padding:6px 14px}
+.founderBox{background:linear-gradient(135deg,#1a1a1a,#222);padding:16px;margin:12px;border-radius:14px;border:1px solid gold}
+.verified{display:inline-block;background:gold;color:#000;font-size:10px;padding:3px 8px;border-radius:10px;font-weight:900;margin-left:6px}
+.ad-box{background:#000;color:#666;padding:10px;font-size:11px;border-top:1px solid #222}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.94);z-index:9999;align-items:center;justify-content:center;padding:15px}
+.modal-box{background:#151515;width:100%;max-width:400px;padding:22px;border-radius:18px;border:2px solid gold;max-height:90vh;overflow:auto}
+.copyBox{background:#000;padding:16px;border-radius:12px;margin:12px 0;border:1.5px dashed gold}
+</style>
+</head>
+<body>
+<div class="header">POSTER NAIJA <span class="verified">✓ VERIFIED</span><div class="sub">BY TAIWO DAVID - FOUNDER</div></div>
+
+<div class="counter" id="counter">Free Posters Left Today: 5</div>
+
+<div class="grid">
+  <div class="card active" onclick="loadTemplate('fashion',this)">👗<br>Fashion</div>
+  <div class="card" onclick="loadTemplate('food',this)">🍔<br>Food</div>
+  <div class="card" onclick="loadTemplate('barber',this)">✂️<br>Barber</div>
+  <div class="card" onclick="loadTemplate('pos',this)">🏧<br>POS</div>
+  <div class="card" onclick="loadTemplate('makeup',this)">💄<br>Makeup</div>
+  <div class="card" onclick="loadTemplate('phone',this)">📱<br>Gadgets</div>
+</div>
+
+<input id="bizName" placeholder="Business Name e.g. Taiwo Cuts">
+<input id="bizPrice" placeholder="Offer e.g. ₦5k PROMO / 20% OFF">
+<input id="bizPhone" placeholder="Your WhatsApp No (your customers will call this)">
+
+<canvas id="posterCanvas" width="1080" height="1350"></canvas>
+
+<button class="btn" onclick="downloadPoster()">💾 Save Poster - Free</button>
+<button class="btn btn-white" onclick="openPayModal()">🔓 Remove Watermark - ₦500 to 8028519092</button>
+<button class="btn btn-green" onclick="sharePoster()">📲 Share to WhatsApp Status</button>
+
+<div class="founderBox">
+  <div style="font-size:18px;font-weight:900;color:gold">👨‍💻 Taiwo David</div>
+  <div style="font-size:13px;color:#aaa;margin:4px 0">Founder & Builder - Poster Naija<br>Supporting Nigerian Hustles</div>
+  <div style="font-size:12px;color:#fff;margin:8px 0;background:#000;padding:8px;border-radius:8px">PalmPay: <b style="color:gold">8028519092</b> - OLUSHOLA TAIWO<br>WhatsApp: 08028519092</div>
+  <button class="btn" style="background:transparent;border:2px solid gold;color:gold;padding:10px;width:100%" onclick="openPayModal()">❤️ Support Founder</button>
+  <a href="https://wa.me/2348028519092?text=Hi%20Taiwo%20David%2C%20I%20love%20Poster%20Naija" target="_blank" style="text-decoration:none"><button class="btn btn-green" style="padding:10px;width:100%;margin-top:6px">💬 Chat Taiwo Directly</button></a>
+</div>
+
+<div class="ad-box">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3940256099942544" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3940256099942544" data-ad-slot="6300978111" data-ad-format="auto"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  Ad space - Taiwo David earns here - Test Ad
+</div>
+
+<div id="payModal" class="modal" onclick="if(event.target==this)closePayModal()">
+  <div class="modal-box">
+    <h2 style="color:gold;margin:0">Unlock Pro - Taiwo David</h2>
+    <p style="color:#aaa;font-size:14px">Pay ₦500 once - Unlimited clean posters</p>
+    <div class="copyBox">
+      <div style="color:#aaa;font-size:12px">SEND TO:</div>
+      <div style="font-size:30px;color:gold;font-weight:900;letter-spacing:1px">8028519092</div>
+      <div style="color:#fff;font-weight:700">OLUSHOLA TAIWO</div>
+      <div style="color:gold;font-size:12px">PalmPay • Founder: Taiwo David</div>
+      <button onclick="copyOpay()" style="margin-top:12px;padding:10px 18px;border-radius:8px;border:none;background:gold;font-weight:900">Copy Number</button>
+    </div>
+    <a href="https://wa.me/2348028519092?text=Hi%20Taiwo%20David%2C%20I%20paid%20N500%20for%20Poster%20Naija%20Pro%20-%20Please%20give%20me%20code%20-%20My%20name%20is" target="_blank" style="text-decoration:none">
+      <button class="btn btn-green" style="width:100%">💬 1. Send Proof on WhatsApp</button>
+    </a>
+    <input id="unlockCode" placeholder="2. Enter code NAIJA500 here" style="width:100%;margin-top:10px">
+    <button class="btn" style="width:100%" onclick="checkCode()">Unlock Forever</button>
+    <div style="font-size:11px;color:#666;margin-top:10px">Your WhatsApp: 08028519092 is saved inside app</div>
+    <button onclick="closePayModal()" style="background:none;border:none;color:#888;margin-top:12px">Close</button>
+  </div>
+</div>
+
+<script>
+const canvas=document.getElementById('posterCanvas');const ctx=canvas.getContext('2d');let currentBiz='fashion';
+function loadTemplate(t,el){currentBiz=t;document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));el.classList.add('active');drawPoster();}
+function drawPoster(){
+  // Pro gradient background
+  let grad=ctx.createLinearGradient(0,0,0,1350);
+  if(currentBiz=='fashion'){grad.addColorStop(0,'#FFD700');grad.addColorStop(1,'#FF8C00');}
+  else if(currentBiz=='food'){grad.addColorStop(0,'#FF4500');grad.addColorStop(1,'#8B0000');}
+  else if(currentBiz=='barber'){grad.addColorStop(0,'#111');grad.addColorStop(1,'#333');}
+  else if(currentBiz=='pos'){grad.addColorStop(0,'#00C853');grad.addColorStop(1,'#004D40');}
+  else if(currentBiz=='makeup'){grad.addColorStop(0,'#FF69B4');grad.addColorStop(1,'#8B008B');}
+  else{grad.addColorStop(0,'#2196F3');grad.addColorStop(1,'#0D47A1');}
+  ctx.fillStyle=grad;ctx.fillRect(0,0,1080,1350);
+  
+  // White card for text
+  ctx.fillStyle='rgba(255,255,255,0.95)';ctx.fillRect(40,40,1000,280);
+  ctx.fillStyle='#000';ctx.font='900 68px system-ui';ctx.fillText((document.getElementById('bizName').value||'YOUR BUSINESS').substring(0,20).toUpperCase(),70,150);
+  ctx.font='600 32px system-ui';ctx.fillStyle='#555';ctx.fillText(currentBiz.toUpperCase()+' • POSTER NAIJA',70,210);
+  ctx.fillStyle='gold';ctx.fillRect(70,240,200,8);
+
+  // Price big
+  ctx.fillStyle=currentBiz=='barber'?'#FFD700':'#fff';ctx.font='900 130px system-ui';
+  let price=document.getElementById('bizPrice').value||'₦5k PROMO';ctx.fillText(price.substring(0,18),50,600);
+  
+  // QR/Call box
+  ctx.fillStyle='rgba(0,0,0,0.85)';ctx.fillRect(40,1050,1000,260);
+  ctx.fillStyle='#fff';ctx.font='700 42px system-ui';ctx.fillText('WhatsApp: '+(document.getElementById('bizPhone').value||'080...'),70,1130);
+  ctx.font='500 28px system-ui';ctx.fillStyle='#aaa';ctx.fillText('Design by Poster Naija • Founder Taiwo David',70,1180);
+  ctx.fillStyle='gold';ctx.font='700 22px system-ui';ctx.fillText('08028519092 - Support Founder',70,1220);
+
+  const paid=localStorage.getItem('paid')==='yes';
+  if(!paid){
+    ctx.fillStyle='rgba(0,0,0,0.8)';ctx.fillRect(0,1260,1080,90);
+    ctx.fillStyle='gold';ctx.font='700 26px system-ui';ctx.fillText('POSTER NAIJA BY TAIWO DAVID • Pay 8028519092 to remove',40,1315);
+  }
+  updateCounter();
+}
+function updateCounter(){
+  let saves=parseInt(localStorage.getItem('saves')||'0');let left=Math.max(0,5-saves);
+  document.getElementById('counter').innerText = localStorage.getItem('paid')==='yes' ? '♾️ Pro Unlocked - Unlimited by Taiwo David' : 'Free Posters Left Today: '+left;
+}
+document.querySelectorAll('input').forEach(i=>{if(i.id!=='unlockCode')i.addEventListener('input',drawPoster)});drawPoster();
+function downloadPoster(){
+  let saves=parseInt(localStorage.getItem('saves')||'0');
+  if(saves>=5 && localStorage.getItem('paid')!=='yes'){openPayModal();return;}
+  localStorage.setItem('saves',saves+1);if(saves>0) alert('Ad shown - Taiwo David earned ₦!');
+  const link=document.createElement('a');link.download='PosterNaija-TaiwoDavid-'+currentBiz+'.png';link.href=canvas.toDataURL();link.click();updateCounter();
+}
+function sharePoster(){alert('Poster saved! Open WhatsApp > Status > Add photo from gallery.');}
+function openPayModal(){document.getElementById('payModal').style.display='flex';}
+function closePayModal(){document.getElementById('payModal').style.display='none';}
+function copyOpay(){navigator.clipboard.writeText('8028519092');alert('Copied! PalmPay 8028519092 - Olushola Taiwo / Taiwo David');}
+function checkCode(){if(document.getElementById('unlockCode').value.trim().toUpperCase()==='NAIJA500'){localStorage.setItem('paid','yes');alert('Thank you for supporting Taiwo David! Pro unlocked forever.');closePayModal();drawPoster();}else alert('Wrong code. Pay ₦500 to 8028519092 then chat Founder on WhatsApp 08028519092');}
+</script>
+</body>
+</html>
